@@ -84,7 +84,14 @@ public class MainActivity extends Activity {
      * OnClick method called when the GiaiThua Button is pressed.
      */
     public void onGiaiThua(View view) {
-        compute(Calculator.Operator.GiaiThua);
+
+        try {
+            compute(Calculator.Operator.GiaiThua);
+        } catch (IllegalArgumentException iae) {
+            Log.e(TAG, "IllegalArgumentException", iae);
+            mResultTextView.setText(getString(R.string.computationError));
+        }
+
     }
 
     private void compute(Calculator.Operator operator) {
@@ -124,6 +131,8 @@ public class MainActivity extends Activity {
             case GiaiThua:
                 result = String.valueOf(
                         mCalculator.tinhGiaithua(operandOne));
+                if (result == "-1")
+                    result=getString(R.string.computationError);
                 break;
             default:
                 result = getString(R.string.computationError);

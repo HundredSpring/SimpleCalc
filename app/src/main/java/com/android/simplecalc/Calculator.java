@@ -41,7 +41,9 @@ public class Calculator {
     public double tinhGiaithua(double firstOperand) {
         if (firstOperand > 0) {
             return firstOperand * tinhGiaithua(firstOperand - 1);
-        } else {
+        } else if (firstOperand < 0){
+            return -1;
+        }else {
             return 1;
         }
     }
